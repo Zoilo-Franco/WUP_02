@@ -1,7 +1,7 @@
 ---
-title: "Cabbages"
-author: "Put your name here!"
-date: "put the date here"
+title: "cabbages"
+author: "Zoilo Franco!"
+date: "Spring 2026"
 output:
   html_document:
     df_print: paged
@@ -10,6 +10,7 @@ output:
 ```{r include=FALSE,echo=FALSE}
 require(tidyverse)
 require(tigerstats)
+require(Hmisc)
 require(MASS)
 veggy <- cabbages
 ```
@@ -25,6 +26,14 @@ veggy <- cabbages
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
+We want to analyze VitC based on Cult method.     
+VitC is numeric,Cult is categorical.    
+We use the numerical~cat helper file. 
+
+$H_0$: There is no difference in VitC content of cabbages based on Cult method.
+
+$H_A$: There is a difference in VitC content of cabbages based on Cult method.
+
 # Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
@@ -35,15 +44,32 @@ veggy <- cabbages
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+boxplot(VitC~Cult,data=veggy)
+```
+
+This boxplot shows that in general, cabbages in culture c52 have in general higher levels of VitC compared to cabbages in culture c39. That the average levels on VitC content in cabbages in culture c52 is higher than VitC content in cabbages in culture c39.
+
 ### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+
+```{r}
+describe(veggy)
+```
+This numerical description of the veggy data shows that the least amount of VitC in a cabbage is 41 and the most amount of VitC in a cabbage is 84, and that the overall mean of VitC content is 57.95 Iu's of VitC . That each culture group had equal amounts of cabbages.
 
 ## Inferential Results
 
 <!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
 
+```{r}
+t.test(VitC~Cult,data=veggy)
+```
+The t-test shows a p-value of 0.00000003405 which is less that 0.05. Rejects the null Hypothesis. This means we have evidence that there is a difference in the average VitC of cabbages in the different Cult. In which the average VitC of cabbages in group c52 are higher the cabbages in group c39.
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+The original question was whether based on culture method c39 and c52 the average amount of VitC in the cabbages shows a significant difference. Through the use of a boxplot that shows in general, group c52 having a higher average of VitC. As well as a t-test showing a p-value of 0.00000003405 which is less that 0.05. Rejecting the null Hypothesis. This means we have evidence that there is a difference in the average number of VitC in the plants based on the culture method. That cabbages in grown in the culture method c52 experienced on average a higher VitC content, compared to cabbages in the culture group c39.
